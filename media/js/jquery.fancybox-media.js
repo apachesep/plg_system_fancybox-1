@@ -1,6 +1,6 @@
 /*!
  * Media helper for fancyBox
- * version: 1.0.6 - (GitHub Master 2016-02-24)
+ * version: 1.0.6 (Fri, 14 Jun 2013)
  * @requires fancyBox v2.0 or later
  *
  * Usage:
@@ -98,8 +98,8 @@
 					hd          : 1,
 					wmode       : 'opaque',
 					enablejsapi : 1,
-					ps          : 'docs',
-					controls    : 1
+                    			ps: 'docs',
+                    			controls: 1
 				},
 				type : 'iframe',
 				url  : '//www.youtube.com/embed/$3'
