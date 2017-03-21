@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+	<author>Sergio Manzi</author>
+	<authorEmail>info@smz.it</authorEmail>
+	<authorUrl>smz.it</authorUrl>
+	<copyright>Copyright (C) 2013 - 2016 Sergio Manzi. All rights reserved.</copyright>
+	<license>GNU General Public License version 3 or (at your option) any later version.</license>
+	<name>PLG_SYSTEM_SMZ_FANCYBOX</name>
+	<description>PLG_SYSTEM_SMZ_FANCYBOX_DESC</description>
+	<version>3.6.0</version>
+	<creationDate>July 2016</creationDate>
+	<files>
+		<filename plugin="smz_fancybox">smz_fancybox.php</filename>
+		<folder>fields</folder>
+		<folder>language</folder>
+	</files>
+	<media destination="plg_smz_fancybox" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+	</media>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="elements" type="textarea" default="a.fancybox" cols="30" rows="10" label="PLG_SMZ_FANCYBOX_FIELD_ELEMENTS" description="PLG_SMZ_FANCYBOX_FIELD_ELEMENTS_DESC" />
+				<field name="enable_close" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_CLOSE_BUTTON" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_CLOSE_BUTTON_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_buttons" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_BUTTONS" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_BUTTONS_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_mousewheel" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_MOUSEWHEEL" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_MOUSEWHEEL_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="close_on_click_inside" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_CLOSE_ON_CLICK_INSIDE" description="PLG_SMZ_FANCYBOX_FIELD_CLOSE_ON_CLICK_INSIDE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="close_on_click_outside" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_FIELD_CLOSE_ON_CLICK_OUTSIDE" description="PLG_SMZ_FANCYBOX_FIELD_CLOSE_ON_CLICK_OUTSIDE_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_thumbs" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_THUMBS" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_THUMBS_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_media" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_MEDIA" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_MEDIA_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_caption" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_CAPTION" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_CAPTION_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_counter" showon="enable_caption:1" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_ENABLE_COUNTER" description="PLG_SMZ_FANCYBOX_FIELD_ENABLE_COUNTER_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="caption_position" showon="enable_caption:1" type="radio" class="btn-group" default="0" label="PLG_SMZ_FANCYBOX_FIELD_CAPTION_POSITION" description="PLG_SMZ_FANCYBOX_FIELD_CAPTION_POSITION_DESC">
+					<option value="0">PLG_SMZ_FANCYBOX_FIELD_CAPTION_OUTSIDE</option>
+					<option value="1">PLG_SMZ_FANCYBOX_FIELD_CAPTION_INSIDE</option>
+				</field>
+				<field name="openclose_transition" type="list" default="none" label="PLG_SMZ_FANCYBOX_FIELD_OPENCLOSE_TRANSITION" description="PLG_SMZ_FANCYBOX_FIELD_OPENCLOSE_TRANSITION_DESC">
+					<option value="none">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_NONE</option>
+					<option value="elastic">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_ELASTIC</option>
+					<option value="fade">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_FADE</option>
+					<option value="swing">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_SWING</option>
+					<option value="linear">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_LINEAR</option>
+					<option value="quad">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_QUAD</option>
+					<option value="cubic">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_CUBIC</option>
+					<option value="quart">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_QUART</option>
+					<option value="quint">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_QUINT</option>
+					<option value="sine">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_SINE</option>
+					<option value="expo">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_EXPO</option>
+					<option value="circ">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_CIRC</option>
+					<option value="bounce">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_BOUNCE</option>
+					<option value="back">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_BACK</option>
+				</field>
+				<field name="open_speed" type="list" default="250" label="PLG_SMZ_FANCYBOX_FIELD_OPENCLOSE_SPEED" description="PLG_SMZ_FANCYBOX_FIELD_OPENCLOSE_SPEED_DESC">
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="150">150</option>
+					<option value="200">200</option>
+					<option value="250">250</option>
+					<option value="300">300</option>
+					<option value="350">350</option>
+					<option value="400">400</option>
+					<option value="450">450</option>
+					<option value="500">500</option>
+					<option value="600">600</option>
+					<option value="700">700</option>
+					<option value="800">800</option>
+					<option value="900">900</option>
+					<option value="1000">1000</option>
+					<option value="1200">1200</option>
+					<option value="1400">1400</option>
+					<option value="1600">1600</option>
+					<option value="1800">1800</option>
+					<option value="2000">2000</option>
+					<option value="3000">3000</option>
+					<option value="4000">4000</option>
+				</field>
+				<field name="nextprev_transition" type="list" default="none" label="PLG_SMZ_FANCYBOX_FIELD_NEXTPREV_TRANSITION" description="PLG_SMZ_FANCYBOX_FIELD_NEXTPREV_TRANSITION_DESC">
+					<option value="none">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_NONE</option>
+					<option value="elastic">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_ELASTIC</option>
+					<option value="fade">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_FADE</option>
+					<option value="swing">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_SWING</option>
+					<option value="linear">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_LINEAR</option>
+					<option value="quad">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_QUAD</option>
+					<option value="cubic">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_CUBIC</option>
+					<option value="quart">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_QUART</option>
+					<option value="quint">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_QUINT</option>
+					<option value="sine">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_SINE</option>
+					<option value="expo">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_EXPO</option>
+					<option value="circ">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_CIRC</option>
+					<option value="bounce">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_BOUNCE</option>
+					<option value="back">PLG_SMZ_FANCYBOX_FIELD_TRANSITION_OPTION_BACK</option>
+				</field>
+				<field name="nextprev_speed" type="list" default="250" label="PLG_SMZ_FANCYBOX_FIELD_NEXTPREV_SPEED" description="PLG_SMZ_FANCYBOX_FIELD_NEXTPREV_SPEED_DESC">
+					<option value="50">50</option>
+					<option value="100">100</option>
+					<option value="150">150</option>
+					<option value="200">200</option>
+					<option value="250">250</option>
+					<option value="300">300</option>
+					<option value="350">350</option>
+					<option value="400">400</option>
+					<option value="450">450</option>
+					<option value="500">500</option>
+					<option value="600">600</option>
+					<option value="700">700</option>
+					<option value="800">800</option>
+					<option value="900">900</option>
+					<option value="1000">1000</option>
+					<option value="1200">1200</option>
+					<option value="1400">1400</option>
+					<option value="1600">1600</option>
+					<option value="1800">1800</option>
+					<option value="2000">2000</option>
+					<option value="3000">3000</option>
+					<option value="4000">4000</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced" addfieldpath="/plugins/system/smz_fancybox/fields">
+				<field name="options" type="textarea" default="" cols="30" rows="10" label="PLG_SMZ_FANCYBOX_FIELD_OPTIONS" description="PLG_SMZ_FANCYBOX_FIELD_OPTIONS_DESC" />
+				<field name="load_fancybox" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_FIELD_LOAD_FANCYBOX" description="PLG_SMZ_FANCYBOX_FIELD_LOAD_FANCYBOX_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="load_css" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_FIELD_LOAD_CSS" description="PLG_SMZ_FANCYBOX_FIELD_LOAD_CSS_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="load_easing" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_FIELD_LOAD_EASING" description="PLG_SMZ_FANCYBOX_FIELD_LOAD_EASING_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="exclude_components" type="components" label="PLG_SMZ_FANCYBOX_FIELD_EXCLUDE_COMPONENTS" description="PLG_SMZ_FANCYBOX_FIELD_EXCLUDE_COMPONENTS_DESC" />
+				<field name="namespace" type="text" default="" label="PLG_SMZ_FANCYBOX_FIELD_NAMESPACE" description="PLG_SMZ_FANCYBOX_FIELD_NAMESPACE_DESC" />
+				<field name="content_type" type="list" default="" label="PLG_SMZ_FANCYBOX_FIELD_CONTENT_TYPE" description="PLG_SMZ_FANCYBOX_FIELD_CONTENT_TYPE_DESC">
+					<option value="">auto</option>
+					<option value="image">image</option>
+					<option value="ajax">ajax</option>
+					<option value="html">html</option>
+					<option value="iframe">iframe</option>
+					<option value="swf">swf</option>
+					<option value="inline">inline</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
