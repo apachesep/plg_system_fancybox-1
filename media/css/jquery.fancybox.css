@@ -275,7 +275,7 @@
 }
 
 span.fancyboxCounter, span.fancyboxTotal {font-weight:bold;}
-html:lang(en) span.fancyboxCounter:before {content:"Image ";}
-html:lang(it) span.fancyboxCounter:before {content:"Immagine ";}
+/* html:lang(en) span.fancyboxCounter:before {content:"Image ";} */
+/* html:lang(it) span.fancyboxCounter:before {content:"Immagine ";} */
 span.fancyboxTotal:before {content:"/";}
 span.fancyboxCaption:before {content:" - "}

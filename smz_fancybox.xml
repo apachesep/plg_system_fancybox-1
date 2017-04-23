@@ -7,8 +7,8 @@
 	<license>GNU General Public License version 3 or (at your option) any later version.</license>
 	<name>PLG_SYSTEM_SMZ_FANCYBOX</name>
 	<description>PLG_SYSTEM_SMZ_FANCYBOX_DESC</description>
-	<version>3.6.2</version>
-	<creationDate>March 2017</creationDate>
+	<version>3.6.3</version>
+	<creationDate>April 2017</creationDate>
 	<files>
 		<filename plugin="smz_fancybox">smz_fancybox.php</filename>
 		<folder>fields</folder>
