@@ -166,7 +166,7 @@ class plgSystemSMZ_fancybox extends JPlugin {
 		{
 			if ($this->params->get('enable_counter', 0)) // outside is default
 			{
-				$options['afterLoad'] = "function(){this.title='<span class=\"fancyboxCounter\">'+(this.index+1)+'</span>'+'<span class=\"fancyboxTotal\">'+this.group.length+'</span>'+(this.title?'<span class=\"fancyboxCaption\">'+this.title+'</span>':'');}";
+				$options['afterLoad'] = "function(){if (this.group.length > 1){this.title='<span class=\"fancyboxCounter\">'+(this.index+1)+'</span>'+'<span class=\"fancyboxTotal\">'+this.group.length+'</span>'+(this.title?'<span class=\"fancyboxCaption\">'+this.title+'</span>':'');};}";
 			}
 
 			// Title position
