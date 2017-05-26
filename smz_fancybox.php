@@ -25,7 +25,8 @@ class plgSystemSMZ_fancybox extends JPlugin {
 	 * @param null
 	 * @return null
 	 */
-	public function onAfterDispatch() {
+	public function onAfterDispatch()
+	{
 		// Do not load in the backend
 		if (JFactory::getApplication()->isAdmin())
 		{
@@ -62,123 +63,138 @@ class plgSystemSMZ_fancybox extends JPlugin {
 			return;
 		}
 
+		$fancyboxVersion = $this->params->get('fancyboxVersion', '21');
 		// Load CSS and JavaScript
-		JHtml::_('jquery.framework');
-		$this->loadStylesheet('jquery.fancybox.css', $this->params->get('load_css', 1));
-		$this->loadStylesheet('jquery.fancybox-buttons.css', $this->params->get('load_css', 1));
-		$this->loadStylesheet('jquery.fancybox-thumbs.css', $this->params->get('enable_thumbs', 0));
-		$this->loadScript('jquery.fancybox.pack.js', $this->params->get('load_fancybox', 1));
-		$this->loadScript('jquery.mousewheel.pack.js', $this->params->get('enable_mousewheel', 1));
-		$this->loadScript('jquery.fancybox-buttons.js', $this->params->get('enable_buttons', 0));
-		$this->loadScript('jquery.fancybox-media.js', $this->params->get('enable_media', 0));
-		$this->loadScript('jquery.fancybox-thumbs.js', $this->params->get('enable_thumbs', 0));
+		switch ($fancyboxVersion)
+		{
+			case '21':
+				// Load CSS and JavaScript
+				JHtml::_('jquery.framework');
+				$this->loadStylesheet('jquery.fancybox.css', $this->params->get('load_css', 1));
+				$this->loadStylesheet('jquery.fancybox-buttons.css', $this->params->get('load_css', 1));
+				$this->loadStylesheet('jquery.fancybox-thumbs.css', $this->params->get('enable_thumbs', 0));
+				$this->loadScript('jquery.fancybox.pack.js', $this->params->get('load_fancybox', 1));
+				$this->loadScript('jquery.mousewheel.pack.js', $this->params->get('enable_mousewheel', 1));
+				$this->loadScript('jquery.fancybox-buttons.js', $this->params->get('enable_buttons', 0));
+				$this->loadScript('jquery.fancybox-media.js', $this->params->get('enable_media', 0));
+				$this->loadScript('jquery.fancybox-thumbs.js', $this->params->get('enable_thumbs', 0));
+				break;
+			case '30':
+				$this->loadStylesheet('jquery.fancybox30.min.css', $this->params->get('load_css', 1));
+				$this->loadScript('jquery.fancybox30.min.js', $this->params->get('load_fancybox', 1));
+				break;
+		}
 
 		// Setup options and helpers
 		$options = array();
 		$helpers = array();
 
-		// Close Button
-		if ($this->params->get('enable_close', 1) == 0) // True is default
+		if ($fancyboxVersion == '21')
 		{
-			$options['closeBtn'] = false;
-		}
-
-		// Close on click inside
-		if ($this->params->get('close_on_click_inside', 0)) // False is default
-		{
-			$options['closeClick'] = 'true';
-		}
-
-		// Close on click outside
-		if ($this->params->get('close_on_click_outside', 1) == 0) // True is default
-		{
-			$helpers[] = 'overlay:{closeClick:false}';
-		}
-
-		// Mouse-wheel
-		if ($this->params->get('enable_mousewheel', 1) == 0) // True is default
-		{
-			$options['mouseWheel'] = false;
-		}
-
-		// Buttons helper
-		if ($this->params->get('enable_buttons', 0) == 1) // False is default
-		{
-			$helpers[] = 'buttons:{}';
-		}
-
-		// Content-type
-		$content_type = $this->params->get('content_type', '');
-		if (!empty($content_type))
-		{
-			$options['type'] = $content_type;
-		}
-
-		// Open/Close Transition
-		$openclose_transition = $this->params->get('openclose_transition', 'none');
-		if (!in_array($openclose_transition, array('', 'fade', 'elastic', 'none')))
-		{
-			$this->loadScript('jquery.easing-1.3.pack.js', $this->params->get('load_easing', 1));
-			if (in_array($openclose_transition, array('swing', 'linear')))
+			// Close Button
+			if ($this->params->get('enable_close', 1) == 0) // True is default
 			{
-				$options['openEasing'] = $openclose_transition;
-				$options['closeEasing'] = $openclose_transition;
+				$options['closeBtn'] = false;
+			}
+
+			// Close on click inside
+			if ($this->params->get('close_on_click_inside', 0)) // False is default
+			{
+				$options['closeClick'] = 'true';
+			}
+
+			// Close on click outside
+			if ($this->params->get('close_on_click_outside', 1) == 0) // True is default
+			{
+				$helpers[] = 'overlay:{closeClick:false}';
+			}
+
+			// Mouse-wheel
+			if ($this->params->get('enable_mousewheel', 1) == 0) // True is default
+			{
+				$options['mouseWheel'] = false;
+			}
+
+			// Buttons helper
+			if ($this->params->get('enable_buttons', 0) == 1) // False is default
+			{
+				$helpers[] = 'buttons:{}';
+			}
+
+			// Content-type
+			$content_type = $this->params->get('content_type', '');
+			if (!empty($content_type))
+			{
+				$options['type'] = $content_type;
+			}
+
+			// Open/Close Transition
+			$openclose_transition = $this->params->get('openclose_transition', 'none');
+			if (!in_array($openclose_transition, array('', 'fade', 'elastic', 'none')))
+			{
+				$this->loadScript('jquery.easing-1.3.pack.js', $this->params->get('load_easing', 1));
+				if (in_array($openclose_transition, array('swing', 'linear')))
+				{
+					$options['openEasing'] = $openclose_transition;
+					$options['closeEasing'] = $openclose_transition;
+				}
+				else
+				{
+					$options['openEasing'] = 'easeInOut'.ucfirst($openclose_transition);
+					$options['closeEasing'] = 'easeInOut'.ucfirst($openclose_transition);
+				}
 			}
 			else
 			{
-				$options['openEasing'] = 'easeInOut'.ucfirst($openclose_transition);
-				$options['closeEasing'] = 'easeInOut'.ucfirst($openclose_transition);
+				if ($openclose_transition != 'fade') // fade is Fancybox default
+				{
+					$options['openEffect'] = $openclose_transition;
+					$options['closeEffect'] = $openclose_transition;
+				}
 			}
-		}
-		else
-		{
-			if ($openclose_transition != 'fade') // fade is Fancybox default
+
+			$openclose_speed = $this->params->get('openclose_speed', 250);
+			if ($openclose_speed != 250) // 250 is default
 			{
-				$options['openEffect'] = $openclose_transition;
-				$options['closeEffect'] = $openclose_transition;
+				$options['openSpeed'] = $openclose_speed;
+				$options['closeSpeed'] = $openclose_speed;
 			}
-		}
 
-		$openclose_speed = $this->params->get('openclose_speed', 250);
-		if ($openclose_speed != 250) // 250 is default
-		{
-			$options['openSpeed'] = $openclose_speed;
-			$options['closeSpeed'] = $openclose_speed;
-		}
-
-		// Next/Prev Transition
-		$nextprev_transition = $this->params->get('nextprev_transition', 'none');
-		if ($nextprev_transition != 'elastic') // elastic is default
-		{
-			$options['nextEffect'] = $nextprev_transition;
-			$options['prevEffect'] = $nextprev_transition;
-		}
-
-		$nextprev_speed = $this->params->get('nextprev_speed', 250);
-		if ($nextprev_speed != 250) // 250 is default
-		{
-			$options['nextSpeed'] = $nextprev_speed;
-			$options['prevSpeed'] = $nextprev_speed;
-		}
-
-		// Caption (using afterload function)
-		if ($this->params->get('enable_caption', 1))
-		{
-			if ($this->params->get('enable_counter', 0)) // outside is default
+			// Next/Prev Transition
+			$nextprev_transition = $this->params->get('nextprev_transition', 'none');
+			if ($nextprev_transition != 'elastic') // elastic is default
 			{
-				$options['afterLoad'] = "function(){if (this.group.length > 1){this.title='<span class=\"fancyboxCounter\">'+(this.index+1)+'</span>'+'<span class=\"fancyboxTotal\">'+this.group.length+'</span>'+(this.title?'<span class=\"fancyboxCaption\">'+this.title+'</span>':'');};}";
+				$options['nextEffect'] = $nextprev_transition;
+				$options['prevEffect'] = $nextprev_transition;
 			}
 
-			// Title position
-			if ($this->params->get('caption_position', 0)) // outside is default
+			$nextprev_speed = $this->params->get('nextprev_speed', 250);
+			if ($nextprev_speed != 250) // 250 is default
 			{
-				$helpers[] = "title:{type:'inside'}";
+				$options['nextSpeed'] = $nextprev_speed;
+				$options['prevSpeed'] = $nextprev_speed;
+			}
+
+			// Caption (using afterload function)
+			if ($this->params->get('enable_caption', 1))
+			{
+				if ($this->params->get('enable_counter', 0)) // outside is default
+				{
+					$options['afterLoad'] = "function(){if (this.group.length > 1){this.title='<span class=\"fancyboxCounter\">'+(this.index+1)+'</span>'+'<span class=\"fancyboxTotal\">'+this.group.length+'</span>'+(this.title?'<span class=\"fancyboxCaption\">'+this.title+'</span>':'');};}";
+				}
+
+				// Title position
+				if ($this->params->get('caption_position', 0)) // outside is default
+				{
+					$helpers[] = "title:{type:'inside'}";
+				}
+			}
+			else
+			{
+				$helpers[] = 'title:null';
 			}
 		}
-		else
-		{
-			$helpers[] = 'title:null';
-		}
+
 
 		// Extra options
 		$extraOptions = trim($this->params->get('options'));
@@ -221,47 +237,50 @@ class plgSystemSMZ_fancybox extends JPlugin {
 			}
 		}
 
-		// Media helper
-		if ($this->params->get('enable_media', 0))
-		{
-			$helpers[] = 'media:{}';
-		}
-
-		// Thumbs helper
-		if ($this->params->get('enable_thumbs', 0))
-		{
-			$helpers[] = 'thumbs:{width:50,height:50}';
-		}
-
-		if (!empty($helpers))
-		{
-			$options[] = 'helpers:{'.implode(',', $helpers).'}';
-		}
-
 		// Build the script
 		$script = '';
 
-		$namespace = trim($this->params->get('namespace', ''));
-		if (empty($namespace))
+		if ($fancyboxVersion == '21')
 		{
-			$namespace = 'jQuery';
-		}
-		else
-		{
-			$script .= $namespace . '=jQuery.noConflict();';
-		}
-
-		$script .= $namespace . '(document).ready(function(){';
-		foreach ($elements as $element)
-		{
-			$script .= $namespace . '("' . $element . '").fancybox(' ;
-			if (!empty($options))
+			// Media helper
+			if ($this->params->get('enable_media', 0))
 			{
-				$script .= '{' . implode(',', $options) . '}';
+				$helpers[] = 'media:{}';
 			}
-			$script .= ');';
+
+			// Thumbs helper
+			if ($this->params->get('enable_thumbs', 0))
+			{
+				$helpers[] = 'thumbs:{width:50,height:50}';
+			}
+
+			if (!empty($helpers))
+			{
+				$options[] = 'helpers:{'.implode(',', $helpers).'}';
+			}
+
+			$namespace = trim($this->params->get('namespace', ''));
+			if (empty($namespace))
+			{
+				$namespace = 'jQuery';
+			}
+			else
+			{
+				$script .= $namespace . '=jQuery.noConflict();';
+			}
+
+			$script .= $namespace . '(document).ready(function(){';
+			foreach ($elements as $element)
+			{
+				$script .= $namespace . '("' . $element . '").fancybox(' ;
+				if (!empty($options))
+				{
+					$script .= '{' . implode(',', $options) . '}';
+				}
+				$script .= ');';
+			}
+			$script .= '});';
 		}
-		$script .= '});';
 
 		// Add the script to the head
 		$document->addScriptDeclaration($script); 
