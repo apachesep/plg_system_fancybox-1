@@ -63,7 +63,7 @@ class plgSystemSMZ_fancybox extends JPlugin {
 			return;
 		}
 
-		$fancyboxVersion = $this->params->get('fancyboxVersion', '21');
+		$fancyboxVersion = (int) $this->params->get('fancyboxVersion', 21);
 		// Load CSS and JavaScript
 		switch ($fancyboxVersion)
 		{
@@ -89,7 +89,9 @@ class plgSystemSMZ_fancybox extends JPlugin {
 		$options = array();
 		$helpers = array();
 
-		if ($fancyboxVersion == '21')
+
+		// Options for Fancybox 2.1
+		if ($fancyboxVersion == 21)
 		{
 			// Close Button
 			if ($this->params->get('enable_close', 1) == 0) // True is default
@@ -193,55 +195,49 @@ class plgSystemSMZ_fancybox extends JPlugin {
 			{
 				$helpers[] = 'title:null';
 			}
-		}
 
 
-		// Extra options
-		$extraOptions = trim($this->params->get('options'));
-		if (!empty($extraOptions))
-		{
-			$extraOptions = explode("\n", $extraOptions);
-			foreach ($extraOptions as $extraOption)
+			// Extra options
+			$extraOptions = trim($this->params->get('options'));
+			if (!empty($extraOptions))
 			{
-				$extraOption = explode('=', $extraOption);
-				if (!empty($extraOption[0]) && !empty($extraOption[1]))
+				$extraOptions = explode("\n", $extraOptions);
+				foreach ($extraOptions as $extraOption)
 				{
-					$options[$extraOption[0]] = trim($extraOption[1]);
+					$extraOption = explode('=', $extraOption);
+					if (!empty($extraOption[0]) && !empty($extraOption[1]))
+					{
+						$options[$extraOption[0]] = trim($extraOption[1]);
+					}
 				}
 			}
-		}
 
-		// Sanitize options
-		foreach ($options as $name => $value)
-		{
-			if (is_bool($value))
+			// Sanitize options
+			foreach ($options as $name => $value)
 			{
-				$bool = ($value) ? 'true' : 'false';
-				$options[$name] = "'$name':$bool";
+				if (is_bool($value))
+				{
+					$bool = ($value) ? 'true' : 'false';
+					$options[$name] = "'$name':$bool";
+				}
+				elseif (is_numeric($value))
+				{
+					$options[$name] = "'$name':$value";
+				}
+				elseif (empty($value))
+				{
+					unset($options[$name]);
+				}
+				elseif (stripos($value,'function') !== FALSE)
+				{
+					$options[$name] = "'$name':$value";
+				}
+				else
+				{
+					$options[$name] = "'$name':'$value'";
+				}
 			}
-			elseif (is_numeric($value))
-			{
-				$options[$name] = "'$name':$value";
-			}
-			elseif (empty($value))
-			{
-				unset($options[$name]);
-			}
-			elseif (stripos($value,'function') !== FALSE)
-			{
-				$options[$name] = "'$name':$value";
-			}
-			else
-			{
-				$options[$name] = "'$name':'$value'";
-			}
-		}
 
-		// Build the script
-		$script = '';
-
-		if ($fancyboxVersion == '21')
-		{
 			// Media helper
 			if ($this->params->get('enable_media', 0))
 			{
@@ -258,29 +254,32 @@ class plgSystemSMZ_fancybox extends JPlugin {
 			{
 				$options[] = 'helpers:{'.implode(',', $helpers).'}';
 			}
-
-			$namespace = trim($this->params->get('namespace', ''));
-			if (empty($namespace))
-			{
-				$namespace = 'jQuery';
-			}
-			else
-			{
-				$script .= $namespace . '=jQuery.noConflict();';
-			}
-
-			$script .= $namespace . '(document).ready(function(){';
-			foreach ($elements as $element)
-			{
-				$script .= $namespace . '("' . $element . '").fancybox(' ;
-				if (!empty($options))
-				{
-					$script .= '{' . implode(',', $options) . '}';
-				}
-				$script .= ');';
-			}
-			$script .= '});';
 		}
+
+		// Build the script
+		$script = '';
+		$namespace = trim($this->params->get('namespace', ''));
+
+		if (empty($namespace))
+		{
+			$namespace = 'jQuery';
+		}
+		else
+		{
+			$script .= $namespace . '=jQuery.noConflict();';
+		}
+
+		$script .= $namespace . '(document).ready(function(){';
+		foreach ($elements as $element)
+		{
+			$script .= $namespace . '("' . $element . '").fancybox(' ;
+			if (!empty($options))
+			{
+				$script .= '{' . implode(',', $options) . '}';
+			}
+			$script .= ');';
+		}
+		$script .= '});';
 
 		// Add the script to the head
 		$document->addScriptDeclaration($script); 

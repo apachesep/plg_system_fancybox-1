@@ -26,10 +26,10 @@
 					<option value="21">PLG_SMZ_FANCYBOX_VERSION21</option>
 					<option value="30">PLG_SMZ_FANCYBOX_VERSION30</option>
 				</field>
+				<field name="elements" type="textarea" default="a.fancybox" cols="30" rows="10" label="PLG_SMZ_FANCYBOX_ELEMENTS" description="PLG_SMZ_FANCYBOX_ELEMENTS_DESC" />
 			</fieldset>
 			<fieldset name="PLG_SMZ_FANCYBOX_OPTIONS">
 				<field name="no_options" showon="fancyboxVersion:30" type="note" label="PLG_SMZ_FANCYBOX_NO_OPTIONS_NOTE" />
-				<field name="elements" showon="fancyboxVersion:21" type="textarea" default="a.fancybox" cols="30" rows="10" label="PLG_SMZ_FANCYBOX_ELEMENTS" description="PLG_SMZ_FANCYBOX_ELEMENTS_DESC" />
 				<field name="enable_close" showon="fancyboxVersion:21" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_ENABLE_CLOSE_BUTTON" description="PLG_SMZ_FANCYBOX_ENABLE_CLOSE_BUTTON_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -150,9 +150,9 @@
 					<option value="3000">3000</option>
 					<option value="4000">4000</option>
 				</field>
+				<field name="options" showon="fancyboxVersion:21" type="textarea" default="" cols="30" rows="10" label="PLG_SMZ_FANCYBOX_EXTRAOPTIONS" description="PLG_SMZ_FANCYBOX_EXTRAOPTIONS_DESC" />
 			</fieldset>
 			<fieldset name="advanced" addfieldpath="/plugins/system/smz_fancybox/fields">
-				<field name="options" type="textarea" default="" cols="30" rows="10" label="PLG_SMZ_FANCYBOX_OPTIONS" description="PLG_SMZ_FANCYBOX_OPTIONS_DESC" />
 				<field name="load_fancybox" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_LOAD_FANCYBOX" description="PLG_SMZ_FANCYBOX_LOAD_FANCYBOX_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
@@ -161,7 +161,7 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
-				<field name="load_easing" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_LOAD_EASING" description="PLG_SMZ_FANCYBOX_LOAD_EASING_DESC">
+				<field name="load_easing" showon="fancyboxVersion:21" type="radio" class="btn-group" default="1" label="PLG_SMZ_FANCYBOX_LOAD_EASING" description="PLG_SMZ_FANCYBOX_LOAD_EASING_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
