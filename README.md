@@ -1,4 +1,4 @@
-# plg_system_smz_fancybox
+# plg_system_fancybox
 **Joomla plugin front-end for the Fancybox JS library**
 
 This what I use for "lightboxes" in my Joomla projects.

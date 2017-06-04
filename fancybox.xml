@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+	<author>Sergio Manzi</author>
+	<authorEmail>info@smz.it</authorEmail>
+	<authorUrl>smz.it</authorUrl>
+	<copyright>Copyright (C) 2013 - 2016 Sergio Manzi. All rights reserved.</copyright>
+	<license>GNU General Public License version 3 or (at your option) any later version.</license>
+	<name>SMZ_FANCYBOX</name>
+	<description>SMZ_FANCYBOX_DESC</description>
+	<version>4.0.0</version>
+	<creationDate>May 2017</creationDate>
+	<files>
+		<filename plugin="fancybox">fancybox.php</filename>
+		<folder>language</folder>
+	</files>
+	<media destination="plg_fancybox" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+	</media>
+	<scriptfile>installer.php</scriptfile>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="script" type="textarea" default="" label="SMZ_FANCYBOX_SCRIPT" description="SMZ_FANCYBOX_SCRIPT_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
